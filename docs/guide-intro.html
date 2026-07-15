@@ -1,0 +1,244 @@
+<!-- ============================================================
+  Guide intro for Settings → Digital Guide → "Guide intro (HTML allowed)"
+  Recreates the front matter (pages 1-5) of the printed seasonal guide.
+  Season-specific bits to review each season are marked with EDIT comments.
+  Markup is wp_kses_post-safe: tables, headings, lists, simple inline styles.
+============================================================= -->
+
+<!-- EDIT each season: temporary facility notices (delete when not needed) -->
+<div style="background:#fff3cd;border-left:4px solid #b45309;padding:10px 14px;margin:0 0 18px;">
+    <strong>The Activity Center is CLOSED Aug. 3 &ndash; Oct. 5 for construction.</strong>
+    Fall classes at the AC don&rsquo;t start until October.
+</div>
+
+<h3>Our Locations</h3>
+<table width="100%" style="border-collapse:collapse;">
+    <tbody>
+    <tr>
+        <td width="33%" style="border:1px solid #d9d9d9;padding:12px;vertical-align:top;">
+            <h4 style="margin:0 0 4px;">Activity Center (AC)</h4>
+            <p style="margin:0 0 8px;">6545 W. 151st St.<br>Overland Park, KS 66223<br>
+                <a href="tel:9136856000">913-685-6000</a></p>
+            <p style="margin:0;"><strong>Programs Offered</strong></p>
+            <ul style="margin:4px 0 10px;">
+                <li>Aquatics</li>
+                <li>Dance (Fall classes at RC)</li>
+                <li>Enrichment</li>
+                <li>Gymnastics</li>
+                <li>Inclusive Rec</li>
+                <li>Special Events</li>
+                <li>Summer Camps</li>
+                <li>Birthday Parties</li>
+            </ul>
+            <p style="margin:0;"><strong>Amenities</strong></p>
+            <ul style="margin:4px 0 10px;">
+                <li>Zero-Depth Entry Pool (85&deg;)</li>
+                <li>Lap Swim Pool (82&deg;)</li>
+                <li>Lazy River Channel</li>
+                <li>Tumbl Trak &amp; Trampoline</li>
+                <li>Outdoor Playground</li>
+                <li>Locker Rooms</li>
+                <li>Lighted Parking Lot</li>
+            </ul>
+            <p style="margin:0;"><strong>Rentals</strong></p>
+            <ul style="margin:4px 0 0;">
+                <li>Room Rentals</li>
+                <li>Pool Rentals</li>
+            </ul>
+        </td>
+        <td width="33%" style="border:1px solid #d9d9d9;padding:12px;vertical-align:top;">
+            <h4 style="margin:0 0 4px;">Rec Center @ Hilltop (RC)</h4>
+            <p style="margin:0 0 8px;">7720 W. 143rd St.<br>Overland Park, KS 66223<br>
+                <a href="tel:9136856090">913-685-6090</a></p>
+            <p style="margin:0;"><strong>Programs Offered</strong></p>
+            <ul style="margin:4px 0 10px;">
+                <li>Fitness</li>
+                <li>Open Court Play</li>
+                <li>Personal Training</li>
+                <li>Pickleball</li>
+                <li>Table Tennis</li>
+                <li>Summer Camps</li>
+                <li>Sports Leagues (Basketball, Volleyball, Pickleball)</li>
+            </ul>
+            <p style="margin:0;"><strong>Amenities</strong></p>
+            <ul style="margin:4px 0 10px;">
+                <li>Indoor Walking Track</li>
+                <li>Cardio, Fitness &amp; Strength Area</li>
+                <li>Basketball/Volleyball Courts</li>
+                <li>Pickleball Courts</li>
+                <li>Table Tennis Area</li>
+                <li>Locker Rooms</li>
+                <li>Concession Stand</li>
+                <li>Lighted Parking Lot</li>
+            </ul>
+            <p style="margin:0;"><strong>Rentals</strong></p>
+            <ul style="margin:4px 0 0;">
+                <li>Room Rentals</li>
+                <li>Court Rentals</li>
+            </ul>
+        </td>
+        <td width="33%" style="border:1px solid #d9d9d9;padding:12px;vertical-align:top;">
+            <h4 style="margin:0 0 4px;">Sports Complex (SC)</h4>
+            <p style="margin:0 0 8px;">9701 W. 137th St.<br>Overland Park, KS 66221<br>
+                <a href="tel:9136856030">913-685-6030</a></p>
+            <p style="margin:0;"><strong>Programs Offered</strong></p>
+            <ul style="margin:4px 0 10px;">
+                <li>Leisure Sports</li>
+                <li>Sports Camps &amp; Clinics</li>
+                <li>Special Events</li>
+                <li>Sports Leagues (Baseball, Softball, Sand Volleyball)</li>
+                <li>Youth Tournaments</li>
+                <li>Adult Sports &amp; Tournaments</li>
+            </ul>
+            <p style="margin:0;"><strong>Amenities</strong></p>
+            <ul style="margin:4px 0 10px;">
+                <li>28 Irrigated Fields</li>
+                <li>9 Concession Stands</li>
+                <li>5 Picnic Shelters</li>
+                <li>3 Playgrounds</li>
+                <li>2 Climbing Rocks</li>
+                <li>Sand Volleyball Court</li>
+                <li>Covered Bleachers</li>
+                <li>Lighted Parking Lots</li>
+            </ul>
+            <p style="margin:0;"><strong>Rentals</strong></p>
+            <ul style="margin:4px 0 0;">
+                <li>Shelter Rentals</li>
+                <li>Field Rentals</li>
+            </ul>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<h3>Locations &amp; Abbreviations</h3>
+<ul>
+    <li><strong>AC</strong> &mdash; Blue Valley Rec Activity Center, 6545 W. 151st St.</li>
+    <li><strong>BVA</strong> &mdash; Blue Valley Academy, 7500 W. 149th Ter.</li>
+    <li><strong>HH</strong> &mdash; Hillman Horsemanship, 12204 W. 207th St.</li>
+    <li><strong>KCFC</strong> &mdash; KC Fencing Center, 12932 W. 87th St.</li>
+    <li><strong>PGF</strong> &mdash; Paint, Glaze &amp; Fire Studio, 12683 Metcalf</li>
+    <li><strong>RC</strong> &mdash; Blue Valley Rec Center Hilltop, 7720 W. 143rd St.</li>
+    <li><strong>SC</strong> &mdash; Blue Valley Rec Sports Complex, 9701 W. 137th St.</li>
+    <li><strong>TBA</strong> &mdash; To Be Announced</li>
+</ul>
+
+<h3>BVRC Connections</h3>
+<p>Get up-to-date information on inclement weather, facility closures, and activity cancellations:</p>
+<ul>
+    <li>Website: <a href="https://www.bluevalleyrec.org/weather">www.bluevalleyrec.org/weather</a></li>
+    <li>Weather App: Rainout Line app (text alerts available &mdash; sign up through Rainout Line)</li>
+    <li>Sports Line: <a href="tel:9136004001">913-600-4001</a></li>
+    <li>Facility Closure Line: <a href="tel:9136004130">913-600-4130</a></li>
+</ul>
+
+<h3>Create Your Amilia Account</h3>
+<p>If you haven&rsquo;t already, please
+    <a href="https://app.amilia.com/store/en/blue-valley" target="_blank" rel="noopener noreferrer">create an account</a>
+    for our online registration software. The Amilia app is also available for iOS and Android.</p>
+
+<hr>
+
+<h3>About Blue Valley Rec</h3>
+<p><strong>Our Vision:</strong> Enriching Lives, Strengthening a Spirit of Community</p>
+<p><strong>Our Mission:</strong> We will champion community and personal growth through dynamic, lifelong recreation experiences.</p>
+<p><strong>Our Core Values:</strong> Integrity &middot; Communication &middot; Customer Service &middot; Teamwork</p>
+<p><strong>Service Area:</strong> Formed in August 1986 by a concerned citizen group to address the shortage
+    of recreation opportunities in the area, BVRC was formed under the auspices of the Blue Valley School
+    District and its patrons are the primary focus of our recreation programming.</p>
+
+<h4>Commissioners</h4>
+<ul>
+    <li><strong>Northeast:</strong> Mike Lewis 913-226-3196 &middot; Jaime Daniel 501-658-2493</li>
+    <li><strong>Northwest:</strong> Ted McBride 913-488-5288 &middot; Todd Davis 816-500-8081</li>
+    <li><strong>South:</strong> Darren Dupriest 913-322-5902 &middot; Henry Abbott 678-358-5184</li>
+    <li><strong>At-Large:</strong> Christi Pribula 913-486-7196</li>
+</ul>
+
+<h4>Scholarships</h4>
+<p>Residents of the Blue Valley School District meeting certain guidelines may be eligible for scholarship
+    assistance for their children ages 18 and younger. If approved, scholarship funds cover 50% of the
+    program fee and applicants are asked to pay the remaining balance. For more information, visit the
+    Scholarship section of <a href="https://www.bluevalleyrec.org">our website</a>.</p>
+
+<h4>ADA Compliance</h4>
+<p>BVRC prohibits discrimination on the basis of race, color, national origin, sex, gender, age, religion,
+    genetic information, pregnancy status, disability, sexual orientation, veteran status, and any other
+    status protected by law in employment and its programs, activities, and services. BVRC complies with
+    the Americans with Disabilities Act (ADA), under which qualified individuals with a disability may be
+    entitled to reasonable accommodations in programs, activities, and services of and in employment with
+    BVRC. For public inquiries regarding the non-discrimination policies, including any request for
+    accommodation under the ADA or any grievance, please contact: <strong>Human Resources &amp; Risk
+    Manager</strong>, 6545 W. 151st St., Overland Park, KS 66223, <a href="tel:9136856003">913-685-6003</a>.</p>
+<p>Persons with a hearing and/or speech disability may register for programs online at
+    <a href="https://www.bluevalleyrec.org">bluevalleyrec.org</a> or by calling the Kansas Relay Service
+    (800-766-3777). Persons with a visual impairment who want to register for a program or need other BVRC
+    documentation will be provided assistance as requested. Forms may be converted to large print or Braille.</p>
+
+<hr>
+
+<h3>Registration Policy</h3>
+<p>To attend the activities, classes, and events listed in this guide, you must first register before
+    attending. An account must be set up prior to registering for those being registered for the activity.</p>
+<ul>
+    <li><strong>Registration:</strong> Fees are due at the time of registration. We reserve the right to
+        cancel, combine, or divide classes based on enrollment. Information is subject to change regarding
+        dates, times, locations, and instructors. Please check our website for updated information.</li>
+    <li><strong>Resident/Non-Resident Participation:</strong> Residents living within BVSD boundaries or
+        owning property within the BVSD boundaries receive a discount on many classes and activities.</li>
+    <li><strong>Wait List:</strong> If a class has met its maximum enrollment, patrons have the option to
+        add a name to the wait list for up to three classes per program session. Should a spot open, staff
+        will contact those on the wait list to fill the available openings. If enrollment from a wait list
+        is accepted, that name will be removed from all other wait lists for that program session. Sorry,
+        patrons cannot be enrolled in a program and be on a wait list for another session of the same
+        program.</li>
+    <li><strong>Class Attendance:</strong> Sorry, children are not allowed to attend classes with their
+        parents. Siblings of participants are not permitted in teaching areas.</li>
+</ul>
+
+<h4>Registration Locations</h4>
+<ul>
+    <li><strong>Online:</strong> Visit <a href="https://www.bluevalleyrec.org">www.bluevalleyrec.org</a>
+        &mdash; under Registration, click on Register Online and log in using your email and password.</li>
+    <li><strong>Phone-In</strong> (please have credit card payment ready):
+        AC <a href="tel:9136856000">913-685-6000</a> &middot;
+        RC <a href="tel:9136856090">913-685-6090</a> &middot;
+        SC <a href="tel:9136856030">913-685-6030</a></li>
+    <li><strong>Walk-Up:</strong> Activity Center (6545 W. 151st St.) &middot; Rec Center @ Hilltop
+        (7720 W. 143rd St.) &middot; Sports Complex (9701 W. 137th St.)</li>
+</ul>
+
+<h4>Refunds</h4>
+<p>A full refund will be granted to those who cancel or withdraw from most programs four (4) business days
+    prior to the start date ($10 fee when cancelling less than four (4) business days, defined as
+    Monday&ndash;Friday), with exceptions listed below. A pro-rated refund may be granted (less the $10 fee)
+    if no more than half of the program dates have been held. No refund will be issued when more than half
+    of the program dates have been held or the program has ended.</p>
+<ul>
+    <li><strong>Gymnastics:</strong> Registrations will not be available or prorated after the second class,
+        including refunds or cancellations. A full refund will be granted to those who cancel or withdraw
+        from a class four (4) business days prior to the start date without a cancellation fee. You may
+        receive a prorated refund if you cancel before the start of the second class period, but you will
+        incur a $10 processing fee along with your refund. No refunds, make-up classes, or Open Gymnastics
+        passes will be given for any missed attendance (including cancellations after the 2nd class).</li>
+    <li><strong>Dance:</strong> Registrations may receive a prorated refund if you cancel before the start
+        of the second class, but you will acquire a $10 processing fee along with your refund. No refunds
+        or make-up classes will be given for any missed attendance (including cancellations after the
+        second class).</li>
+    <li><strong>Aquatics:</strong> Registrations will be refunded 100% when cancelled 10 days prior to
+        start of the activity. A $10 processing fee will be assessed to cancellations made from 9&ndash;5
+        days of the start of the activity. No refunds will be issued for cancellations within 4 or fewer
+        days of the start of the activity.</li>
+</ul>
+
+<h4>Miscellaneous</h4>
+<ul>
+    <li><strong>Photographs/Video:</strong> Blue Valley Rec and our partners reserve the right to use all
+        photographs and video of participants for promotional purposes, including print, digital, adverts,
+        and social media promotions. This includes drone footage as well.</li>
+    <li><strong>Health Notice:</strong> If you or a family member suffers from any health problems that are
+        affected by the presence of allergens or by participation in a program, please view our policy
+        regarding serious allergies and health problems on our website.</li>
+    <li><strong>Lost &amp; Found:</strong> Items of value are kept for one (1) month and then donated to a
+        local, non-profit agency. Water bottles are not kept.</li>
+</ul>
