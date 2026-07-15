@@ -50,18 +50,42 @@ function adg_sanitize_rich_text( ?string $html ): string {
         'h5'     => [],
         'h6'     => [],
     ];
-    return wp_kses( $html, $allowed );
+    $html = wp_kses( $html, $allowed );
+
+    // Amilia content may carry target="_blank" links without rel=noopener
+    if ( function_exists( 'wp_targeted_link_rel' ) ) {
+        $html = wp_targeted_link_rel( $html );
+    }
+
+    return $html;
+}
+
+/**
+ * Timestamp for an Amilia date's LITERAL date component, pinned to noon UTC.
+ *
+ * Amilia timestamps are org-local with an offset ("2026-12-22T21:50:00-06:00").
+ * Converting them to a Unix instant and formatting shifts evening times past
+ * midnight UTC — the date renders one day late. The date portion of the string
+ * is already the org-local calendar date, so use it directly.
+ *
+ * @return int|false
+ */
+function adg_local_date_ts( ?string $iso ) {
+    if ( ! $iso || strlen( $iso ) < 10 ) {
+        return false;
+    }
+    return strtotime( substr( $iso, 0, 10 ) . 'T12:00:00+00:00' );
 }
 
 /** Format an activity's date span compactly ("10/6 – 12/22/26"). */
 function adg_format_date_range( ?string $start, ?string $end ): string {
-    $start_ts = $start ? strtotime( $start ) : false;
-    $end_ts   = $end ? strtotime( $end ) : false;
+    $start_ts = adg_local_date_ts( $start );
+    $end_ts   = adg_local_date_ts( $end );
     if ( ! $start_ts && ! $end_ts ) {
         return '';
     }
     if ( $start_ts && $end_ts ) {
-        if ( date( 'Y-m-d', $start_ts ) === date( 'Y-m-d', $end_ts ) ) {
+        if ( gmdate( 'Y-m-d', $start_ts ) === gmdate( 'Y-m-d', $end_ts ) ) {
             return date_i18n( 'n/j/y', $start_ts );
         }
         return date_i18n( 'n/j', $start_ts ) . ' – ' . date_i18n( 'n/j/y', $end_ts );
@@ -119,7 +143,9 @@ function adg_group_program_items( array $items ): array {
                 return $cmp !== 0 ? $cmp : strcasecmp( (string) $a['Name'], (string) $b['Name'] );
             } );
         }
+        unset( $sessions );
     }
+    unset( $subs );
 
     return $grouped;
 }
@@ -409,9 +435,9 @@ function adg_output_assets() {
                 if (!w) { window.print(); return; }
                 var doc = w.document;
                 doc.open();
-                doc.write('<!doctype html><html><head><meta charset="utf-8"><title>' +
-                    (document.title || 'Program Guide') + '</title></head><body></body></html>');
+                doc.write('<!doctype html><html><head><meta charset="utf-8"></head><body></body></html>');
                 doc.close();
+                doc.title = document.title || 'Program Guide';
                 var styleEl = doc.createElement('style');
                 styleEl.textContent = style.textContent +
                     '\nbody{font-family:Arial,Helvetica,sans-serif;color:#1a1a1a;margin:24px;}' +

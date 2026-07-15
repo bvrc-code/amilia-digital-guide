@@ -3,7 +3,7 @@
  * Plugin Name:  Amilia Digital Guide
  * Plugin URI:   https://bluevalleyrec.org
  * Description:  Renders a seasonal digital program guide from Amilia SmartRec activity data via the [amilia_digital_guide] shortcode.
- * Version:      1.1.0
+ * Version:      1.1.1
  * Author:       Blue Valley Recreation
  * License:      GPL-2.0-or-later
  * Text Domain:  amilia-digital-guide
@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Plugin constants
-define( 'ADG_VERSION',      '1.1.0' );
+define( 'ADG_VERSION',      '1.1.1' );
 define( 'ADG_PLUGIN_DIR',   plugin_dir_path( __FILE__ ) );
 define( 'ADG_PLUGIN_URL',   plugin_dir_url( __FILE__ ) );
 define( 'ADG_OPTION_GROUP', 'adg_settings' );

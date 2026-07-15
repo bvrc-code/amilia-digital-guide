@@ -56,6 +56,17 @@ function adg_sanitize_guide_config( $raw ): array {
         'programs'      => [],
     ];
 
+    if ( ! isset( $raw['programs'] ) || ! is_array( $raw['programs'] ) ) {
+        // No program rows in the POST — the programs table wasn't rendered
+        // (Amilia API down when the page loaded). Preserve the saved config
+        // instead of wiping the whole guide.
+        $existing = get_option( 'adg_guide_config', [] );
+        if ( is_array( $existing ) && ! empty( $existing['programs'] ) && is_array( $existing['programs'] ) ) {
+            $clean['programs'] = $existing['programs'];
+        }
+        return $clean;
+    }
+
     if ( ! empty( $raw['programs'] ) && is_array( $raw['programs'] ) ) {
         foreach ( $raw['programs'] as $program_id => $row ) {
             $program_id = absint( $program_id );
@@ -247,7 +258,7 @@ function adg_render_settings_page() {
                         <button type="button" class="button" id="adg-cover-clear">Remove</button>
                         <p class="description">Shown between the guide title and the intro (and as the cover page of the printed PDF). Leave blank for no cover.</p>
                         <img id="adg-cover-preview"
-                             src="<?php echo esc_url( $config['cover_image'] ); ?>"
+                             <?php echo $config['cover_image'] ? 'src="' . esc_url( $config['cover_image'] ) . '"' : ''; ?>
                              alt="" style="max-width:280px;height:auto;margin-top:8px;<?php echo $config['cover_image'] ? '' : 'display:none;'; ?>">
                     </td>
                 </tr>
