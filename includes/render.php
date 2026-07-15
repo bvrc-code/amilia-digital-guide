@@ -189,6 +189,12 @@ function adg_render_guide( array $items, ?array $only_program = null ): string {
                 <?php endif; ?>
                 <button type="button" class="adg-print-btn adg-no-print">Download / Print PDF</button>
             </div>
+            <?php if ( $config['cover_image'] !== '' ) : ?>
+                <div class="adg-cover">
+                    <img src="<?php echo esc_url( $config['cover_image'] ); ?>"
+                         alt="<?php echo esc_attr( $config['title'] !== '' ? $config['title'] : 'Program guide cover' ); ?>">
+                </div>
+            <?php endif; ?>
             <?php if ( $config['intro'] !== '' ) : ?>
                 <div class="adg-intro"><?php echo wp_kses_post( $config['intro'] ); ?></div>
             <?php endif; ?>
@@ -340,6 +346,8 @@ function adg_output_assets() {
         padding: 8px 16px; font-size: 14px; cursor: pointer;
     }
     .adg-print-btn:hover { background: #1e3a6d; }
+    .adg-cover { margin: 14px 0; }
+    .adg-cover img { max-width: 100%; height: auto; display: block; }
     .adg-discount-note {
         background: #f0f5ff; border-left: 4px solid #14284b; padding: 10px 14px;
         margin: 14px 0; font-size: 0.95em;
@@ -380,6 +388,7 @@ function adg_output_assets() {
     }
     @media print {
         .adg-no-print { display: none !important; }
+        .adg-cover { page-break-after: always; margin: 0; }
         .adg-section { page-break-before: always; margin: 0 0 20px; }
         .adg-section:first-of-type { page-break-before: auto; }
         .adg-class { page-break-inside: avoid; }
@@ -410,8 +419,30 @@ function adg_output_assets() {
                 doc.head.appendChild(styleEl);
                 doc.body.appendChild(doc.importNode(guide, true));
                 w.focus();
-                // Give the new window a beat to lay out before printing
-                setTimeout(function () { w.print(); }, 250);
+                // Wait for images (cover, etc.) to load before printing,
+                // capped at 4s so a slow image can't block the dialog forever
+                var imgs = Array.prototype.slice.call(doc.images).filter(function (img) {
+                    return !img.complete;
+                });
+                var printed = false;
+                function go() {
+                    if (printed) { return; }
+                    printed = true;
+                    w.print();
+                }
+                if (!imgs.length) {
+                    setTimeout(go, 250);
+                } else {
+                    var remaining = imgs.length;
+                    imgs.forEach(function (img) {
+                        img.addEventListener('load', done);
+                        img.addEventListener('error', done);
+                    });
+                    function done() {
+                        if (--remaining <= 0) { setTimeout(go, 100); }
+                    }
+                    setTimeout(go, 4000);
+                }
             });
         });
     })();

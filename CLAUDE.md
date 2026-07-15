@@ -104,7 +104,7 @@ Shortcode → adg_shortcode_handler()  [shortcode.php]
 | `adg_base_url` | Amilia activities endpoint with `{PAGE}` | Activities URL template |
 | `adg_programs_url` | Amilia programs endpoint with `{PAGE}` | Programs URL template |
 | `adg_cache_expiry` | 3600 | Transient TTL in seconds (0 = caching disabled; cron must never `set_transient(..., 0)`) |
-| `adg_guide_config` | `[]` | Guide Builder config: `title`, `intro`, `discount_note`, `programs[id] = {include, order, label, intro}` |
+| `adg_guide_config` | `[]` | Guide Builder config: `title`, `cover_image`, `intro`, `discount_note`, `programs[id] = {include, order, label, intro}` |
 | `adg_activities_backup` | `[]` | Last-known-good dataset (autoload=no) — outage fallback |
 | `adg_programs_backup` | `[]` | Last-known-good program list (autoload=no) |
 | `adg_last_refresh` / `adg_last_refresh_error` | — | Cron status shown on the settings page |

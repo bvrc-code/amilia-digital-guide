@@ -3,7 +3,7 @@ Contributors: bluevalleyrec
 Tags: amilia, smartrec, activities, program guide, recreation
 Requires at least: 6.0
 Tested up to: 6.8
-Stable tag: 1.0.0
+Stable tag: 1.1.0
 License: GPL-2.0-or-later
 
 Renders a seasonal digital program guide from Amilia SmartRec activity data via the [amilia_digital_guide] shortcode.
@@ -70,6 +70,12 @@ the guide renders (~10× smaller than the raw payload). The program list is
 cached for 24 hours (`adg_programs_cache`).
 
 == Changelog ==
+
+= 1.1.0 =
+* Cover image setting (media-library picker) between the guide title and the
+  intro; rendered full-width on screen and as its own cover page in the
+  printed PDF. Print now waits for images to load (capped at 4 s) before
+  opening the print dialog.
 
 = 1.0.0 =
 * Initial release: Guide Builder settings screen, Program → Category →

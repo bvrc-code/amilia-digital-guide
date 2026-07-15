@@ -50,6 +50,7 @@ function adg_sanitize_guide_config( $raw ): array {
 
     $clean = [
         'title'         => isset( $raw['title'] ) ? sanitize_text_field( $raw['title'] ) : '',
+        'cover_image'   => isset( $raw['cover_image'] ) ? esc_url_raw( $raw['cover_image'] ) : '',
         'intro'         => isset( $raw['intro'] ) ? wp_kses_post( $raw['intro'] ) : '',
         'discount_note' => isset( $raw['discount_note'] ) ? wp_kses_post( $raw['discount_note'] ) : '',
         'programs'      => [],
@@ -90,6 +91,7 @@ function adg_get_guide_config(): array {
     }
     return wp_parse_args( $config, [
         'title'         => '',
+        'cover_image'   => '',
         'intro'         => '',
         'discount_note' => 'Blue Valley School District residents receive a 25% discount on most programs. Discounts are applied at registration.',
         'programs'      => [],
@@ -164,6 +166,14 @@ function adg_handle_cache_action() {
     exit;
 }
 
+// ── Load WP media library JS only on our settings page ────────────────────────
+add_action( 'admin_enqueue_scripts', 'adg_enqueue_media_picker' );
+function adg_enqueue_media_picker( $hook ) {
+    if ( $hook === 'settings_page_amilia-digital-guide' ) {
+        wp_enqueue_media();
+    }
+}
+
 // ── Settings page ──────────────────────────────────────────────────────────────
 add_action( 'admin_menu', 'adg_add_settings_page' );
 function adg_add_settings_page() {
@@ -224,6 +234,21 @@ function adg_render_settings_page() {
                                name="adg_guide_config[title]"
                                value="<?php echo esc_attr( $config['title'] ); ?>"
                                placeholder="e.g. Fall 2026 Digital Program Guide">
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row"><label for="adg-cover-image">Cover image</label></th>
+                    <td>
+                        <input type="text" id="adg-cover-image" class="regular-text"
+                               name="adg_guide_config[cover_image]"
+                               value="<?php echo esc_attr( $config['cover_image'] ); ?>"
+                               placeholder="https://…/cover.jpg">
+                        <button type="button" class="button" id="adg-cover-pick">Choose Image</button>
+                        <button type="button" class="button" id="adg-cover-clear">Remove</button>
+                        <p class="description">Shown between the guide title and the intro (and as the cover page of the printed PDF). Leave blank for no cover.</p>
+                        <img id="adg-cover-preview"
+                             src="<?php echo esc_url( $config['cover_image'] ); ?>"
+                             alt="" style="max-width:280px;height:auto;margin-top:8px;<?php echo $config['cover_image'] ? '' : 'display:none;'; ?>">
                     </td>
                 </tr>
                 <tr>
@@ -390,5 +415,48 @@ function adg_render_settings_page() {
             <?php submit_button( 'Refresh Program List', 'secondary', 'submit', false ); ?>
         </form>
     </div>
+    <script>
+    (function () {
+        'use strict';
+        var input   = document.getElementById('adg-cover-image');
+        var preview = document.getElementById('adg-cover-preview');
+        var pick    = document.getElementById('adg-cover-pick');
+        var clear   = document.getElementById('adg-cover-clear');
+        if (!input || !pick) { return; }
+
+        function updatePreview() {
+            if (input.value) {
+                preview.src = input.value;
+                preview.style.display = '';
+            } else {
+                preview.removeAttribute('src');
+                preview.style.display = 'none';
+            }
+        }
+
+        pick.addEventListener('click', function () {
+            if (typeof wp === 'undefined' || !wp.media) { return; }
+            var frame = wp.media({
+                title: 'Select Cover Image',
+                button: { text: 'Use this image' },
+                library: { type: 'image' },
+                multiple: false
+            });
+            frame.on('select', function () {
+                var att = frame.state().get('selection').first().toJSON();
+                input.value = att.url;
+                updatePreview();
+            });
+            frame.open();
+        });
+
+        clear.addEventListener('click', function () {
+            input.value = '';
+            updatePreview();
+        });
+
+        input.addEventListener('change', updatePreview);
+    })();
+    </script>
     <?php
 }
